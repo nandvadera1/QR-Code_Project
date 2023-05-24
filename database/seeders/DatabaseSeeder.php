@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\user_types;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,10 +29,8 @@ class DatabaseSeeder extends Seeder
             'user_type_id' => 1,
             'name' => 'Administrator',
             'email' => 'admin@gmail.com',
-            'password' => 'secret'
+            'password' => Hash::make('secret')
         ]);
-
-        //Hash the password remaining
 
         // \App\Models\User::factory(10)->create();
     }
