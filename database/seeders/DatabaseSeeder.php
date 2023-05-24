@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\user_types;
+use App\Models\UserType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        user_types::create([
+        UserType::create([
             'type' => 'Administrator'
         ]);
 
-        user_types::create([
+        UserType::create([
             'type' => 'User'
         ]);
 
