@@ -9,6 +9,7 @@ class UserType extends Model
 {
     use HasFactory;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,4 +21,5 @@ class UserType extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
+
 }
