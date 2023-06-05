@@ -107,7 +107,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -293,6 +293,7 @@ return [
           [
               'text' => 'Users',
               'url' => '/admin/users',
+              'active' => ['/admin/users*']
           ],
 //         Navbar items:
 //        [
@@ -425,7 +426,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

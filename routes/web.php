@@ -24,12 +24,9 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::delete('/admin/users/{user}', 'UserController@destroy')->name('users.destroy');
-Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/admin/users/create', [UserController::class, 'create']);
-Route::post('/admin/users', [UserController::class, 'store']);
-Route::get('/admin/users/{user}/edit', [UserController::class, 'edit']);
-Route::patch('/admin/users/{user}', [UserController::class, 'update']);
-//Route::delete('/admin/users/{user}', [UserController::class, 'destroy']);
+Route::group(['prefix'=>'admin'],function (){
+    Route::get('users/dataTable',[UserController::class,'dataTable']);
+});
 
-//Route::resource('/admin/users', UserController::class)->except('show');
+Route::delete('/admin/users/{user}', [UserController::class, 'destroy']);
+Route::resource('admin/users', UserController::class);
