@@ -6,9 +6,9 @@
 
         {{-- Navbar brand logo --}}
         @if(config('adminlte.logo_img_xl'))
-            @include('adminlte::partials.common.brand-logo-xl')
+            @include('adminlte::components.partials.common.brand-logo-xl')
         @else
-            @include('adminlte::partials.common.brand-logo-xs')
+            @include('adminlte::components.partials.common.brand-logo-xs')
         @endif
 
         {{-- Navbar toggler button --}}
@@ -40,15 +40,15 @@
             {{-- User menu link --}}
             @if(Auth::user())
                 @if(config('adminlte.usermenu_enabled'))
-                    @include('adminlte::partials.navbar.menu-item-dropdown-user-menu')
+                    @include('adminlte::components.partials.navbar.menu-item-dropdown-user-menu')
                 @else
-                    @include('adminlte::partials.navbar.menu-item-logout-link')
+                    @include('adminlte::components.partials.navbar.menu-item-logout-link')
                 @endif
             @endif
 
             {{-- Right sidebar toggler link --}}
             @if(config('adminlte.right_sidebar'))
-                @include('adminlte::partials.navbar.menu-item-right-sidebar-toggler')
+                @include('adminlte::components.partials.navbar.menu-item-right-sidebar-toggler')
             @endif
         </ul>
 

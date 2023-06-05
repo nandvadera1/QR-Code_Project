@@ -26,23 +26,8 @@
             </div>
 
             {!! Form::open(['url' => '/admin/users', 'method' => 'POST', 'id' => 'create', 'enctype' => 'multipart/form-data']) !!}
-
-            <div class="card-body">
-
-                <x-form name="name" />
-                <x-form name="email" />
-                <x-password />
-
-                <div class="form-group">
-                    {!! Form::label('user_type_id', 'Type') !!}
-                    {!! Form::select('user_type_id', $type, null, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type']) !!}
-                </div>
-                <x-error name="user_type_id" />
-
-            </div>
-
-            <x-form_submit />
-
+            @csrf
+                <x-partial.form :type="$type"  />
             {!! Form::close() !!}
         </div>
         @stop

@@ -5,7 +5,7 @@
     {{-- Navbar left links --}}
     <ul class="navbar-nav">
         {{-- Left sidebar toggler link --}}
-        @include('adminlte::partials.navbar.menu-item-left-sidebar-toggler')
+        @include('adminlte::components.partials.navbar.menu-item-left-sidebar-toggler')
 
         {{-- Configured left links --}}
         @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-left'), 'item')
@@ -25,15 +25,15 @@
         {{-- User menu link --}}
         @if(Auth::user())
             @if(config('adminlte.usermenu_enabled'))
-                @include('adminlte::partials.navbar.menu-item-dropdown-user-menu')
+                @include('adminlte::components.partials.navbar.menu-item-dropdown-user-menu')
             @else
-                @include('adminlte::partials.navbar.menu-item-logout-link')
+                @include('adminlte::components.partials.navbar.menu-item-logout-link')
             @endif
         @endif
 
         {{-- Right sidebar toggler link --}}
         @if(config('adminlte.right_sidebar'))
-            @include('adminlte::partials.navbar.menu-item-right-sidebar-toggler')
+            @include('adminlte::components.partials.navbar.menu-item-right-sidebar-toggler')
         @endif
     </ul>
 

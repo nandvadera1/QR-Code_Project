@@ -16,36 +16,36 @@
 
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())
-            @include('adminlte::partials.common.preloader')
+            @include('adminlte::components.partials.common.preloader')
         @endif
 
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
-            @include('adminlte::partials.navbar.navbar-layout-topnav')
+            @include('adminlte::components.partials.navbar.navbar-layout-topnav')
         @else
-            @include('adminlte::partials.navbar.navbar')
+            @include('adminlte::components.partials.navbar.navbar')
         @endif
 
         {{-- Left Main Sidebar --}}
         @if(!$layoutHelper->isLayoutTopnavEnabled())
-            @include('adminlte::partials.sidebar.left-sidebar')
+            @include('adminlte::components.partials.sidebar.left-sidebar')
         @endif
 
         {{-- Content Wrapper --}}
         @empty($iFrameEnabled)
-            @include('adminlte::partials.cwrapper.cwrapper-default')
+            @include('adminlte::components.partials.cwrapper.cwrapper-default')
         @else
-            @include('adminlte::partials.cwrapper.cwrapper-iframe')
+            @include('adminlte::components.partials.cwrapper.cwrapper-iframe')
         @endempty
 
         {{-- Footer --}}
         @hasSection('footer')
-            @include('adminlte::partials.footer.footer')
+            @include('adminlte::components.partials.footer.footer')
         @endif
 
         {{-- Right Control Sidebar --}}
         @if(config('adminlte.right_sidebar'))
-            @include('adminlte::partials.sidebar.right-sidebar')
+            @include('adminlte::components.partials.sidebar.right-sidebar')
         @endif
 
     </div>

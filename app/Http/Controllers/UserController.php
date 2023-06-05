@@ -11,12 +11,6 @@ use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
-
     public function index()
     {
         $heads = [
@@ -52,16 +46,12 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->input('user_type_id'));
-
         $attributes = request()->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:7|max:255',
             'user_type_id' => 'required'
         ]);
-
-//        dd($attributes);
 
         $attributes['password'] = Hash::make($attributes['password']);
 
@@ -87,8 +77,6 @@ class UserController extends Controller
             'password' => 'required|min:7|max:255',
             'user_type_id' => 'required',
         ]);
-
-//        dd($attributes);
 
         $attributes['password'] = Hash::make($attributes['password']);
 

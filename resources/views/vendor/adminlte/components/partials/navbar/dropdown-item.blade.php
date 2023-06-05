@@ -3,11 +3,11 @@
 @if ($navbarItemHelper->isSubmenu($item))
 
     {{-- Dropdown submenu --}}
-    @include('adminlte::partials.navbar.dropdown-item-submenu')
+    @include('adminlte::components.partials.navbar.dropdown-item-submenu')
 
 @elseif ($navbarItemHelper->isLink($item))
 
     {{-- Dropdown link --}}
-    @include('adminlte::partials.navbar.dropdown-item-link')
+    @include('adminlte::components.partials.navbar.dropdown-item-link')
 
 @endif

@@ -1,3 +1,5 @@
+{{--{{ dd($user->user_type_id) }}--}}
+
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -27,23 +29,9 @@
             </div>
 
             {!! Form::open(['url' => '/admin/users/' . $user->id, 'method' => 'POST', 'id' => 'edit', 'enctype' => 'multipart/form-data']) !!}
+            @csrf
             @method('PATCH')
-            <div class="card-body">
-
-                <x-form name="name" :user="$user" />
-                <x-form name="email" :user="$user" />
-                <x-password  />
-
-                <div class="form-group">
-                    {!! Form::label('user_type_id', 'Type') !!}
-                    {!! Form::select('user_type_id', $type, old('user_type_id') ?: $user->user_type_id, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type']) !!}
-                </div>
-                <x-error name="user_type_id" />
-
-            </div>
-
-            <x-form_submit />
-
+                <x-partial.form :type="$type" :user="$user" />
             {!! Form::close() !!}
         </div>
         @stop
