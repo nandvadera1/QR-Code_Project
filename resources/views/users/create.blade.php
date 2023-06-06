@@ -27,7 +27,7 @@
 
             {!! Form::open(['url' => '/admin/users', 'method' => 'POST', 'id' => 'create', 'enctype' => 'multipart/form-data']) !!}
             @csrf
-                <x-partial.form :type="$type"  />
+            <x-_form :type="$type" />
             {!! Form::close() !!}
         </div>
         @stop

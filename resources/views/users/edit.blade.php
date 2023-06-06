@@ -31,7 +31,7 @@
             {!! Form::open(['url' => '/admin/users/' . $user->id, 'method' => 'POST', 'id' => 'edit', 'enctype' => 'multipart/form-data']) !!}
             @csrf
             @method('PATCH')
-                <x-partial.form :type="$type" :user="$user" />
+                <x-_form :type="$type" :user="$user" />
             {!! Form::close() !!}
         </div>
         @stop
