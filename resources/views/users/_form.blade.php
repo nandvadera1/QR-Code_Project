@@ -1,4 +1,6 @@
-@props(['type', 'user'=> null])
+@php
+    $attributes = isset($attributes) ? $attributes : [];
+@endphp
 
 @php
     $name = isset($user) ? $user->name : '';

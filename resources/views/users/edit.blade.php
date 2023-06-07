@@ -31,8 +31,9 @@
             {!! Form::open(['url' => '/admin/users/' . $user->id, 'method' => 'POST', 'id' => 'edit', 'enctype' => 'multipart/form-data']) !!}
             @csrf
             @method('PATCH')
-                <x-_form :type="$type" :user="$user" />
+            @include('users._form', ['type' => $type, 'user' => $user])
             {!! Form::close() !!}
+
         </div>
         @stop
 

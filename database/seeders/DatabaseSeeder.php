@@ -32,6 +32,5 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('secret')
         ]);
 
-        // \App\Models\User::factory(10)->create();
     }
 }

@@ -27,8 +27,9 @@
 
             {!! Form::open(['url' => '/admin/users', 'method' => 'POST', 'id' => 'create', 'enctype' => 'multipart/form-data']) !!}
             @csrf
-            <x-_form :type="$type" />
+            @include('users._form', ['type' => $type, 'user' => new App\Models\User()])
             {!! Form::close() !!}
+
         </div>
         @stop
 
