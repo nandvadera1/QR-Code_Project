@@ -29,7 +29,6 @@
             @csrf
             @include('users._form', ['type' => $type, 'user' => new App\Models\User()])
             {!! Form::close() !!}
-
         </div>
         @stop
 
