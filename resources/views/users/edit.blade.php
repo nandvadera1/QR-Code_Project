@@ -1,5 +1,3 @@
-{{--{{ dd($user->user_type_id) }}--}}
-
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -28,10 +26,14 @@
                 <h3 class="card-title">Edit User</h3>
             </div>
 
-            {!! Form::open(['url' => '/admin/users/' . $user->id, 'method' => 'POST', 'id' => 'edit', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($user, ['url' => '/admin/users/' . $user->id, 'method' => 'POST', 'id' => 'edit', 'enctype' => 'multipart/form-data']) !!}
             @csrf
             @method('PATCH')
-            @include('users._form', ['type' => $type, 'user' => $user])
+            @include('users._form')
+
+            <div class="card-footer">
+                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+            </div>
             {!! Form::close() !!}
 
         </div>

@@ -27,13 +27,18 @@
 
             {!! Form::open(['url' => '/admin/users', 'method' => 'POST', 'id' => 'create', 'enctype' => 'multipart/form-data']) !!}
             @csrf
-            @include('users._form', ['type' => $type, 'user' => new App\Models\User()])
+            @include('users._form')
+
+            <div class="card-footer">
+                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+            </div>
             {!! Form::close() !!}
         </div>
         @stop
 
         @section('css')
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+
             <style>
                 .error {
                     color: red;
