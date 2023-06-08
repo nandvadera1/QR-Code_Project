@@ -27,7 +27,6 @@
                         <h2 class="card-title">Users</h2>
                         <a class="btn btn-primary float-right" href="/admin/users/create" role="button">Add User</a>
                     </div>
-
                     <div class="card-body">
                         <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" bordered>
                         </x-adminlte-datatable>
@@ -36,7 +35,6 @@
             </div>
         </div>
     </div>
-
 @stop
 
 @section('css')
@@ -67,7 +65,7 @@
                             });
                         $('#table1').DataTable().ajax.reload();
                     }
-                });
+            });
         });
     </script>
 @stop
