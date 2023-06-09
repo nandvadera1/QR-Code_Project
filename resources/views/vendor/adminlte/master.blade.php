@@ -2,6 +2,18 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+    <style>
+        .error{
+            color: red;
+            font-size: small;
+        }
+    </style>
 
     {{-- Base Meta Tags --}}
     <meta charset="utf-8">
@@ -104,6 +116,66 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#validate').validate({
+                rules: {
+                    name: 'required',
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 7,
+                        maxlength: 255
+                    },
+                    user_type_id: 'required',
+                },
+                messages: {
+                    name: 'Please enter your name',
+                    email: {
+                        required: 'Please enter your email address',
+                        email: 'Please enter a valid email address'
+                    },
+                    password: {
+                        required: 'Please enter your password',
+                        minlength: 'Password must be at least 3 characters long',
+                        maxlength: 'Password cannot exceed 7 characters'
+                    },
+                    user_type_id: 'Please enter your type',
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
+            $('#table1').on('click', '.btn_delete', function () {
+                var id = $(this).data('id');
+                var url= "/admin/users/"+id;
+                var deleteConfirm = confirm("Are you sure to delete User with id : "+id+ "?");
+                if (deleteConfirm === true) {
+                    var token = $("meta[name='csrf-token']").attr("content");
+                    $.ajax(
+                        {
+                            url: url,
+                            type: 'DELETE',
+                            data: {
+                                "id": id,
+                                "_token": token,
+                            },
+                            success: function (response){
+                                console.log("Delete operation successful");
+
+                            }
+                        });
+                    $('#table1').DataTable().ajax.reload();
+                }
+            });
+        });
+    </script>
 
 </body>
 

@@ -10,7 +10,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/home">Home</a></li>
                     <li class="breadcrumb-item active">Users</li>
                 </ol>
             </div>
@@ -19,6 +19,9 @@
 @stop
 
 @section('content')
+    <div id="notification" class="alert alert-success alert-dismissible fade show" style="display: none; margin-bottom: 15px; role="alert">
+    <strong id="notification-text"></strong>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -35,38 +38,22 @@
             </div>
         </div>
     </div>
-@stop
+    @if(session()->has('success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                var notification = document.getElementById('notification');
+                var notificationText = document.getElementById('notification-text');
 
-@section('css')
-@stop
+                var successMessage = "{{ session('success') }}";
+                if (successMessage) {
+                    notificationText.textContent = successMessage;
+                    notification.style.display = 'block';
 
-
-@section('js')
-    <script>
-        $(document).ready(function(){
-            $('#table1').on('click', '.btn_delete', function () {
-                    var id = $(this).data('id');
-                    var url= "/admin/users/"+id;
-                    var deleteConfirm = confirm("Are you sure to delete User with id : "+id+ "?");
-                    if (deleteConfirm == true) {
-                        var token = $("meta[name='csrf-token']").attr("content");
-                        $.ajax(
-                            {
-                                url: url,
-                                type: 'DELETE',
-                                data: {
-                                    "id": id,
-                                    "_token": token,
-                                },
-                                success: function (response){
-                                    console.log("Delete operation successful");
-
-                                }
-                            });
-                        $('#table1').DataTable().ajax.reload();
-                    }
+                    setTimeout(function() {
+                        notification.style.display = 'none';
+                    }, 4000);
+                }
             });
-        });
-    </script>
+        </script>
+    @endif
 @stop
-

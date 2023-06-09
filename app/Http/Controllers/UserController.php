@@ -63,7 +63,7 @@ class UserController extends Controller
 
         User::create($attributes);
 
-        return redirect('/admin/users');
+        return redirect('/admin/users')->with('success', 'User Added Successfully!!');
     }
 
     public function edit(User $user)
@@ -88,7 +88,7 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return back();
+        return back()->with('success', 'User Updated Successfully!!');
     }
 
     public function destroy(User $user)
