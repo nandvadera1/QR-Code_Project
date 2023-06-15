@@ -293,17 +293,20 @@ return [
         [
             'text' => 'Users',
             'url' => '/admin/users',
-            'active' => ['/admin/users*']
+            'active' => ['/admin/users*'],
+            'icon' => 'fas fa-users'
         ],
         [
             'text' => 'Categories',
             'url' => '/admin/categories',
-            'active' => ['/admin/categories*']
+            'active' => ['/admin/categories*'],
+            'icon' => 'fas fa-folder'
         ],
         [
             'text' => 'Products',
             'url' => '/admin/products',
-            'active' => ['/admin/products*']
+            'active' => ['/admin/products*'],
+            'icon' => 'fas fa-cube'
         ],
     ],
 

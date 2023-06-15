@@ -19,9 +19,6 @@
 @stop
 
 @section('content')
-    <div id="notification" class="alert alert-success alert-dismissible fade show" style="display: none; margin-bottom: 15px;" role="alert">
-        <strong id="notification-text"></strong>
-    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -38,7 +35,6 @@
             </div>
         </div>
     </div>
-    @include('products._successMessage')
 @stop
 
 @section('js')

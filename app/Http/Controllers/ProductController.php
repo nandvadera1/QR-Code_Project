@@ -65,15 +65,9 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-        $categoryID = $request->query('category_id');
-
-        $category = Category::find($categoryID);
-
         $categoryType = Category::pluck('name', 'id');
 
         return view('products.create', [
-            'category' => $category,
-            'categoryID' => $categoryID,
             'categoryType' => $categoryType
         ]);
     }
@@ -85,7 +79,8 @@ class ProductController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        Product::create($attributes);
+        $category = Category::findOrFail($request->get('category_id'));
+        $category->products()->create($attributes);
 
         return redirect("/admin/products")->with('success', 'Product Added Successfully!');
     }
@@ -113,7 +108,7 @@ class ProductController extends Controller
 
         $product->update($attributes);
 
-        return back()->with('success', 'Product Updated Successfully!!');
+        return redirect('/admin/products')->with('success', 'Product Updated Successfully!!');
     }
 
     public function destroy(Product $product)

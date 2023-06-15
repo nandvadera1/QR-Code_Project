@@ -86,7 +86,7 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return back()->with('success', 'User Updated Successfully!!');
+        return redirect('/admin/users')->with('success', 'User Updated Successfully!!');
     }
 
     public function destroy(User $user)

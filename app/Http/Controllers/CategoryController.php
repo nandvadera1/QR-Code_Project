@@ -77,7 +77,7 @@ class CategoryController extends Controller
 
         $category->update($attributes);
 
-        return back()->with('success', 'Category Updated Successfully!!');
+        return redirect('/admin/categories')->with('success', 'Category Updated Successfully!!');
     }
 
     public function destroy(Category $category)
