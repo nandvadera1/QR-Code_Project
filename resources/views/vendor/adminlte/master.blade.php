@@ -117,6 +117,23 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
+    @if(session()->has('success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+                var notification = document.getElementById('notification');
+                var notificationText = document.getElementById('notification-text');
+                var successMessage = "{{ session('success') }}";
+                if (successMessage) {
+                    notificationText.textContent = successMessage;
+                    notification.style.display = 'block';
+                    setTimeout(function () {
+                        notification.style.display = 'none';
+                    }, 4000);
+                }
+            });
+        </script>
+    @endif
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -151,7 +168,6 @@
                     form.submit();
                 }
             });
-
 
 
         });
