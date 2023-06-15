@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Users</h1>
+                <h1>Categories</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                    <li class="breadcrumb-item active">Edit User</li>
+                    <li class="breadcrumb-item active">Edit Category</li>
                 </ol>
             </div>
         </div>
@@ -25,13 +25,13 @@
     <div class="container-fluid mt-3">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Edit User</h3>
+                <h3 class="card-title">Edit Category</h3>
             </div>
-            {!! Form::model($user, ['url' => '/admin/users/' . $user->id, 'id' => 'validate', 'method'=>'patch', 'enctype' => 'multipart/form-data']) !!}
-            @include('users._form')
+            {!! Form::model($category, ['url' => '/admin/categories/' . $category->id, 'id' => 'validate', 'method'=>'patch', 'enctype' => 'multipart/form-data']) !!}
+            @include('categories._form')
             <div class="card-footer">
                 {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
-                <a href="/admin/users" type="submit" class="btn btn-default float-right">Cancel</a>
+                <a href="/admin/categories" type="submit" class="btn btn-default float-right">Cancel</a>
             </div>
             {!! Form::close() !!}
         </div>

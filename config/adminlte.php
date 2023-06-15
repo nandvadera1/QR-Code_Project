@@ -290,11 +290,21 @@ return [
     */
 
     'menu' => [
-          [
-              'text' => 'Users',
-              'url' => '/admin/users',
-              'active' => ['/admin/users*']
-          ],
+        [
+            'text' => 'Users',
+            'url' => '/admin/users',
+            'active' => ['/admin/users*']
+        ],
+        [
+            'text' => 'Categories',
+            'url' => '/admin/categories',
+            'active' => ['/admin/categories*']
+        ],
+        [
+            'text' => 'Products',
+            'url' => '/admin/products',
+            'active' => ['/admin/products*']
+        ],
     ],
 
 

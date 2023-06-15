@@ -20,7 +20,6 @@ class UserController extends Controller
     public function index()
     {
         $heads = [
-            'ID',
             'Type',
             'Name',
             'Email',
@@ -33,7 +32,6 @@ class UserController extends Controller
             'serverSide' => true,
             'ajax' => url('admin/users/dataTable'),
             'columns' => [
-                ['data' => 'id', 'name' => 'id'],
                 ['data' => 'type.type', 'name' => 'type.type'],
                 ['data' => 'name', 'name' => 'name'],
                 ['data' => 'email', 'name' => 'email'],
