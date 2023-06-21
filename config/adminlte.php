@@ -308,6 +308,12 @@ return [
             'active' => ['/admin/products*'],
             'icon' => 'fas fa-cube'
         ],
+        [
+            'text' => 'Campaigns',
+            'url' => '/admin/campaigns',
+            'active' => ['/admin/campaigns*'],
+            'icon' => 'fas fa-rocket'
+        ],
     ],
 
 

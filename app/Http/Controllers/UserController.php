@@ -93,7 +93,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return back();
+        return 'Success';
     }
 
     public function dataTable()

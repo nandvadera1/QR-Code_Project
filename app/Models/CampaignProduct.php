@@ -5,23 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class CampaignProduct extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class,'category_id');
-    }
+    protected $fillable = ['campaign_id', 'product_id'];
 
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);
     }
 
-    protected $attributes = [
-        'category_id' => null,
-    ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
