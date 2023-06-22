@@ -94,7 +94,11 @@
     <div class="form-group row">
         {!! Form::label('products', 'Products', ['class' => 'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::select('products[]', $productType, $selectedProducts ?? null, ['class' => 'form-control select2', 'multiple' => 'multiple', 'required']) !!}
+            <x-adminlte-select2 id="products" name="products[]" label-class="text-danger" multiple>
+                @foreach($productType as $productId => $productName)
+                    <option value="{{ $productId }}" @if(isset($selectedProducts) && in_array($productId, $selectedProducts)) selected @endif>{{ $productName }}</option>
+                @endforeach
+            </x-adminlte-select2>
         </div>
         @error('products')
         <p class="text-danger text-xs mt-1">
