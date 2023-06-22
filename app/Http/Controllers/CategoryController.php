@@ -84,6 +84,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return "Success";
+        return 'Success';
     }
 }
