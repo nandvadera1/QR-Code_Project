@@ -43,7 +43,7 @@
             $('#table1').on('click', '.btn_delete', function () {
                 var id = $(this).data('id');
                 var url = "/admin/users/" + id;
-                var deleteConfirm = confirm("Are you sure to delete User with id : " + id + "?");
+                var deleteConfirm = confirm("Are you sure you want to delete this User?");
                 if (deleteConfirm === true) {
                     var token = $("meta[name='csrf-token']").attr("content");
                     $.ajax(
@@ -55,7 +55,7 @@
                                 "_token": token,
                             },
                             success: function (response) {
-                                console.log("Delete operation successful");
+                                console.log("User deleted successfully");
                             }
                         });
                     $('#table1').DataTable().ajax.reload();

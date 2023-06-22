@@ -66,7 +66,7 @@
             $('#table1').on('click', '.btn_delete', function () {
                 var id = $(this).data('id');
                 var url = "/admin/products/" + id;
-                var deleteConfirm = confirm("Are you sure to delete Product with id : " + id + "?");
+                var deleteConfirm = confirm("Are you sure you want to delete this Product?");
                 if (deleteConfirm === true) {
                     var token = $("meta[name='csrf-token']").attr("content");
                     $.ajax(
@@ -78,7 +78,7 @@
                                 "_token": token,
                             },
                             success: function (response) {
-                                console.log("Delete operation successful");
+                                console.log("Product deleted successfully");
                             }
                         });
                     $('#table1').DataTable().ajax.reload();
