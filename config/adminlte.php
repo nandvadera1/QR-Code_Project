@@ -308,6 +308,12 @@ return [
             'active' => ['/admin/products*'],
             'icon' => 'fas fa-cube'
         ],
+        [
+            'text' => 'Campaigns',
+            'url' => '/admin/campaigns',
+            'active' => ['/admin/campaigns*'],
+            'icon' => 'fas fa-rocket'
+        ],
     ],
 
 
@@ -367,17 +373,22 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css',
                 ],
             ],
         ],

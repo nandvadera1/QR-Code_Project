@@ -16,6 +16,11 @@ class Product extends Model
         return $this->belongsTo(Category::class,'category_id');
     }
 
+    public function campaign()
+    {
+        return $this->belongsTo(Campaign::class);
+    }
+  
     protected $attributes = [
         'category_id' => null,
     ];
