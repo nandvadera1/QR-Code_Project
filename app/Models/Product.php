@@ -20,7 +20,7 @@ class Product extends Model
     {
         return $this->belongsTo(Campaign::class);
     }
-
+  
     protected $attributes = [
         'category_id' => null,
     ];
