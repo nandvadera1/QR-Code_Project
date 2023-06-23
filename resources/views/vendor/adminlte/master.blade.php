@@ -117,6 +117,23 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
+    @if(session()->has('success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+                var notification = document.getElementById('notification');
+                var notificationText = document.getElementById('notification-text');
+                var successMessage = "{{ session('success') }}";
+                if (successMessage) {
+                    notificationText.textContent = successMessage;
+                    notification.style.display = 'block';
+                    setTimeout(function () {
+                        notification.style.display = 'none';
+                    }, 4000);
+                }
+            });
+        </script>
+    @endif
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -152,28 +169,7 @@
                 }
             });
 
-            $('#table1').on('click', '.btn_delete', function () {
-                var id = $(this).data('id');
-                var url= "/admin/users/"+id;
-                var deleteConfirm = confirm("Are you sure to delete User with id : "+id+ "?");
-                if (deleteConfirm === true) {
-                    var token = $("meta[name='csrf-token']").attr("content");
-                    $.ajax(
-                        {
-                            url: url,
-                            type: 'DELETE',
-                            data: {
-                                "id": id,
-                                "_token": token,
-                            },
-                            success: function (response){
-                                console.log("Delete operation successful");
 
-                            }
-                        });
-                    $('#table1').DataTable().ajax.reload();
-                }
-            });
         });
     </script>
 

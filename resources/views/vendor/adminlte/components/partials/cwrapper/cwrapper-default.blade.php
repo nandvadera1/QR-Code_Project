@@ -21,6 +21,7 @@
     {{-- Main Content --}}
     <div class="content">
         <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
+            @include('vendor.adminlte.components.partials.notification.success')
             @yield('content')
         </div>
     </div>
