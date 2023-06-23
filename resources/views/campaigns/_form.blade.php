@@ -1,14 +1,13 @@
 <div class="card-body">
     <div class="form-group row">
-        {!! Form::label('category_id', 'Category', ['class' => 'col-sm-2 col-form-label']) !!}
+        {!! Form::label('is_enabled', 'Enable', ['class' => 'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            @if(isset($product))
-                {!! Form::select('category_id', $categoryType, $categoryID ?? null, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type', 'disabled' => 'disabled']) !!}
-            @else
-                {!! Form::select('category_id', $categoryType, $categoryID ?? null, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type']) !!}
-            @endif
+            <div class="form-check">
+                {!! Form::hidden('is_enabled', 0) !!}
+                {!! Form::checkbox('is_enabled', 1, $campaign->is_enabled ?? null, ['class' => 'form-check-input', 'id' => 'is_enabled_checkbox']) !!}
+            </div>
         </div>
-        @error('password')
+        @error('is_enabled')
         <p class="text-danger text-xs mt-1">
             {{ $message }}
         </p>
@@ -27,28 +26,16 @@
         @enderror
     </div>
 
-{{--    <div class="form-group row">--}}
-{{--        {!! Form::label('is_enabled', 'Is Enabled', ['class' => 'col-sm-2 col-form-label']) !!}--}}
-{{--        <div class="col-sm-10">--}}
-{{--            {!! Form::number('is_enabled', $campaign->is_enabled ?? null, ['class' => 'form-control', 'required', 'min' => 0, 'max' => 1, 'step' => 1, 'placeholder' => "Enter 1 or 0"]) !!}--}}
-{{--        </div>--}}
-{{--        @error('is_enabled')--}}
-{{--        <p class="text-danger text-xs mt-1">--}}
-{{--            {{ $message }}--}}
-{{--        </p>--}}
-{{--        @enderror--}}
-{{--    </div>--}}
-
     <div class="form-group row">
-        {!! Form::label('is_enabled', 'Enabled', ['class' => 'col-sm-2 col-form-label']) !!}
+        {!! Form::label('category_id', 'Category', ['class' => 'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            <div class="form-check">
-                {!! Form::hidden('is_enabled', 0) !!}
-                {!! Form::checkbox('is_enabled', 1, $campaign->is_enabled ?? null, ['class' => 'form-check-input', 'id' => 'is_enabled_checkbox']) !!}
-                {!! Form::label('is_enabled_checkbox', ' Enable the campaign', ['class' => 'form-check-label']) !!}
-            </div>
+            @if(isset($product))
+                {!! Form::select('category_id', $categoryType, $categoryID ?? null, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type', 'disabled' => 'disabled']) !!}
+            @else
+                {!! Form::select('category_id', $categoryType, $categoryID ?? null, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type']) !!}
+            @endif
         </div>
-        @error('is_enabled')
+        @error('password')
         <p class="text-danger text-xs mt-1">
             {{ $message }}
         </p>
