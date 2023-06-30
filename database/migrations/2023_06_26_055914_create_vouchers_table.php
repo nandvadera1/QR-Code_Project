@@ -38,23 +38,28 @@ class CreateVouchersTable extends Migration
             BEGIN
                 DECLARE chars VARCHAR(62);
                 DECLARE code VARCHAR(16);
+                DECLARE codeExists INT;
                 SET chars = \'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\';
 
                 WHILE numberOfVouchers > 0 DO
-                    SET code = \'\';
+                    SET codeExists = 1;
 
-                    WHILE CHAR_LENGTH(code) < 16 DO
-                        SET code = CONCAT(code, SUBSTRING(chars, FLOOR(RAND() * 62) + 1, 1));
+                    WHILE codeExists > 0 DO
+                        SET code = \'\';
+
+                        WHILE CHAR_LENGTH(code) < 16 DO
+                            SET code = CONCAT(code, SUBSTRING(chars, FLOOR(RAND() * 62) + 1, 1));
+                        END WHILE;
+
+                        SELECT COUNT(*) INTO codeExists FROM vouchers WHERE code = code LIMIT 1;
                     END WHILE;
 
-                    INSERT INTO vouchers (campaign_id, code) VALUES (campaignId, code)
-                    ON DUPLICATE KEY UPDATE code = CONCAT(code, SUBSTRING(chars, FLOOR(RAND() * 62) + 1, 1));
+                    INSERT INTO vouchers (campaign_id, code) VALUES (campaignId, code);
 
                     SET numberOfVouchers = numberOfVouchers - 1;
                 END WHILE;
             END
         ');
-
     }
 
     /**

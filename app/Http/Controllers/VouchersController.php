@@ -27,8 +27,7 @@ class VouchersController extends Controller
             ->when($campaignID, function ($query, $campaignID) {
                 return $query->where('campaign_id', $campaignID);
             })
-            ->select('id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id')
-            ->get();
+            ->select('id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id');
 
         return DataTables::of($vouchers)
             ->addColumn('campaign_id', function($row){
@@ -61,7 +60,7 @@ class VouchersController extends Controller
 
         DB::select("CALL generate_vouchers($campaignId, $numberOfVouchers)");
 
-        return back();
+        return redirect('/admin/vouchers')->with('success', 'Vouchers created Successfully');
     }
 
 }

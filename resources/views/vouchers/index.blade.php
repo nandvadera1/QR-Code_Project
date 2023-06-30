@@ -83,20 +83,6 @@
                             columns: ':visible'
                         }
                     },
-                    {
-                        extend: 'pdf',
-                        text: 'Export PDF',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Print',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
                 ],
                 ajax: "{{ url('admin/vouchers/dataTable') }}",
                 columns: [
