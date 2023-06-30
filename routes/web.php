@@ -29,7 +29,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix'=>'admin'],function (){
+Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
     Route::get('users/dataTable',[UserController::class,'dataTable']);
     Route::get('categories/dataTable',[CategoryController::class,'dataTable']);
     Route::get('products/dataTable', [ProductController::class, 'dataTable']);
