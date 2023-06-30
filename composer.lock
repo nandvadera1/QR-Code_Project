@@ -5,6 +5,8 @@
         "This file is @generated automatically"
     ],
     "content-hash": "0dcb76fdde023556aa3d33791eea7e5d",
+    "content-hash": "d5989e36821bb41bd13350031d4fe12e",
+
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1247,6 +1249,7 @@
             "time": "2023-04-17T16:11:26+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "intervention/image",
             "version": "2.7.2",
             "source": {
@@ -1331,6 +1334,8 @@
             "time": "2022-05-21T17:30:32+00:00"
         },
         {
+=======
+>>>>>>> 5a990eac5f08725e9bf78f13f56cf81a1893a6e3
             "name": "itsgoingd/clockwork",
             "version": "v5.1.12",
             "source": {

@@ -320,6 +320,7 @@ return [
             'active' => ['/admin/vouchers*'],
             'icon' => 'fas fa-qrcode'
         ],
+
     ],
 
 
