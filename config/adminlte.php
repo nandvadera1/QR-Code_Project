@@ -318,7 +318,8 @@ return [
             'text' => 'Vouchers',
             'url' => '/admin/vouchers',
             'active' => ['/admin/vouchers*'],
-            'icon' => 'fas fa-qrcode'
+            'icon' => 'fas fa-qrcode',
+            'can'=> 'admin',
         ],
 
     ],
