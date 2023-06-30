@@ -294,25 +294,29 @@ return [
             'text' => 'Users',
             'url' => '/admin/users',
             'active' => ['/admin/users*'],
-            'icon' => 'fas fa-users'
+            'icon' => 'fas fa-users',
+            'can'=> 'admin',
         ],
         [
             'text' => 'Categories',
             'url' => '/admin/categories',
             'active' => ['/admin/categories*'],
-            'icon' => 'fas fa-folder'
+            'icon' => 'fas fa-folder',
+            'can'=> 'admin',
         ],
         [
             'text' => 'Products',
             'url' => '/admin/products',
             'active' => ['/admin/products*'],
-            'icon' => 'fas fa-cube'
+            'icon' => 'fas fa-cube',
+            'can'=> 'admin',
         ],
         [
             'text' => 'Campaigns',
             'url' => '/admin/campaigns',
             'active' => ['/admin/campaigns*'],
-            'icon' => 'fas fa-rocket'
+            'icon' => 'fas fa-rocket',
+            'can'=> 'admin',
         ],
         [
             'text' => 'Vouchers',
