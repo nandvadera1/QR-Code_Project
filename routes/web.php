@@ -34,16 +34,11 @@ Route::group(['prefix'=>'admin'],function (){
     Route::get('categories/dataTable',[CategoryController::class,'dataTable']);
     Route::get('products/dataTable', [ProductController::class, 'dataTable']);
     Route::get('campaigns/dataTable',[CampaignController::class,'dataTable']);
+    Route::get('vouchers/dataTable',[VouchersController::class,'dataTable']);
 
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('campaigns', CampaignController::class);
+    Route::resource('vouchers', VouchersController::class);
 });
-
-Route::get('admin/vouchers', [VouchersController::class, 'index']);
-Route::get('admin/vouchers/create', [VouchersController::class, 'create']);
-Route::post('admin/vouchers/', [VouchersController::class, 'store']);
-Route::get('admin/vouchers/dataTable',[VouchersController::class,'dataTable']);
-Route::get('vouchers/generate-pdf', [VouchersController::class, 'generatePDF'])->name('vouchers.generate-pdf');
-
