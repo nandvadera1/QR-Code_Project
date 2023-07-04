@@ -70,6 +70,10 @@ class UserTransactionController extends Controller
 
         $matched = $voucher->where('code', $code)->first();
 
+        if($matched == null){
+            return back()->with('fail', 'No QR Code Found.');
+        }
+
         if($matched->redeemed_at === null){
             $campaign_id = $matched->campaign_id;
 
