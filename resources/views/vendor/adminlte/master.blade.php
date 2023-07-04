@@ -132,7 +132,24 @@
             });
         </script>
     @endif
-    
+
+    @if(session()->has('fail'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+                var notification = document.getElementById('notification');
+                var notificationText = document.getElementById('notification-text');
+                var failMessage = "{{ session('fail') }}";
+                if (failMessage) {
+                    notificationText.textContent = failMessage;
+                    notification.style.display = 'block';
+                    setTimeout(function () {
+                        notification.style.display = 'none';
+                    }, 4000);
+                }
+            });
+        </script>
+    @endif
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {

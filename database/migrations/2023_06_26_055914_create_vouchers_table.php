@@ -19,7 +19,7 @@ class CreateVouchersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('campaign_id');
             $table->string('code', 16)->unique();
-            $table->date('redeemed_at')->nullable();
+            $table->dateTime('redeemed_at')->nullable();
             $table->unsignedBigInteger('redeemed_by_user_id')->nullable();
             $table->timestamps();
 
@@ -38,21 +38,15 @@ class CreateVouchersTable extends Migration
             BEGIN
                 DECLARE chars VARCHAR(62);
                 DECLARE code VARCHAR(16);
-                DECLARE codeExists INT;
                 SET chars = \'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\';
 
                 WHILE numberOfVouchers > 0 DO
-                    SET codeExists = 1;
 
-                    WHILE codeExists > 0 DO
                         SET code = \'\';
 
                         WHILE CHAR_LENGTH(code) < 16 DO
                             SET code = CONCAT(code, SUBSTRING(chars, FLOOR(RAND() * 62) + 1, 1));
                         END WHILE;
-
-                        SELECT COUNT(*) INTO codeExists FROM vouchers WHERE code = code LIMIT 1;
-                    END WHILE;
 
                     INSERT INTO vouchers (campaign_id, code) VALUES (campaignId, code);
 

@@ -325,6 +325,27 @@ return [
             'icon' => 'fas fa-qrcode',
             'can'=> 'admin',
         ],
+        [
+            'text' => 'Transactions',
+            'url' => '/admin/transactions',
+            'active' => ['/admin/transactions*'],
+            'icon' => 'fas fa-wallet',
+            'can'=> 'admin',
+        ],
+        [
+            'text' => 'Scan QR Code',
+            'url' => '/user/transactions/create',
+            'active' => ['/user/transactions/create'],
+            'icon' => 'fas fa-qrcode',
+            'can' => 'user',
+        ],
+        [
+            'text' => 'Transaction History',
+            'url' => '/user/transactions',
+            'active' => ['/user/transactions'],
+            'icon' => 'fas fa-history',
+            'can' => 'user',
+        ],
 
     ],
 

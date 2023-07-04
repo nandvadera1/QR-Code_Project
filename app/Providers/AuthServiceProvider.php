@@ -34,5 +34,15 @@ class AuthServiceProvider extends ServiceProvider
             return false;
 
         });
+
+        Gate::define('user', function ($user) {
+
+            if ($user->user_type_id == 2){
+                return true;
+            }
+
+            return false;
+
+        });
     }
 }

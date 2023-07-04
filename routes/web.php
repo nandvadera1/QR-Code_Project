@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminTransactionController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserTransactionController;
 use App\Http\Controllers\VouchersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,10 +37,20 @@ Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
     Route::get('products/dataTable', [ProductController::class, 'dataTable']);
     Route::get('campaigns/dataTable',[CampaignController::class,'dataTable']);
     Route::get('vouchers/dataTable',[VouchersController::class,'dataTable']);
+    Route::get('transactions/dataTable',[AdminTransactionController::class,'dataTable']);
 
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('campaigns', CampaignController::class);
     Route::resource('vouchers', VouchersController::class);
+    Route::resource('transactions', AdminTransactionController::class);
+
+    Route::get('transactions/points/{user}', [AdminTransactionController::class, 'points']);
+});
+
+Route::group(['prefix'=>'user'],function (){
+    Route::get('transactions/dataTable',[UserTransactionController::class,'dataTable']);
+
+    Route::resource('transactions', UserTransactionController::class);
 });
