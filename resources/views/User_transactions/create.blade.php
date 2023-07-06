@@ -24,13 +24,43 @@
             <div class="card-header">
                 <h3 class="card-title">Scan QR Coder</h3>
             </div>
-            {!! Form::open(['url' => '/user/transactions', 'id' => 'validate', 'enctype' => 'multipart/form-data', 'class' => "form-horizontal"]) !!}
-            @include('User_transactions._form')
-            <div class="card-footer">
-                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
-                <a href="/user/transactions" type="submit" class="btn btn-default float-right">Cancel</a>
-            </div>
+            <div id="qr-reader" style="width:350px;" ></div>
+            <div id="qr-reader-results"></div>
+            {!! Form::open(['url' => '/user/transactions', 'id' => 'scan', 'enctype' => 'multipart/form-data', 'class' => "form-horizontal"]) !!}
+            {!! Form::hidden('scannedValue', null, ['id' => 'scannedValue']) !!}
             {!! Form::close() !!}
         </div>
     </div>
 @stop
+
+@section('js')
+    <script>
+        var resultContainer = document.getElementById('qr-reader-results');
+        var lastResult, countResults = 0;
+
+        function onScanSuccess(decodedText) {
+            if (decodedText !== lastResult) {
+                ++countResults;
+                lastResult = decodedText;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/user/transactions/points',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        scannedValue: decodedText
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        document.getElementById('scannedValue').value = response;
+                        document.getElementById('scan').submit();
+                    },
+                });
+            }
+        }
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+    </script>
+@endsection

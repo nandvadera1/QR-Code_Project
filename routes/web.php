@@ -51,6 +51,9 @@ Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
 
 Route::group(['prefix'=>'user'],function (){
     Route::get('transactions/dataTable',[UserTransactionController::class,'dataTable']);
+    Route::post('transactions/points', [UserTransactionController::class, 'scan']);
 
     Route::resource('transactions', UserTransactionController::class);
 });
+
+

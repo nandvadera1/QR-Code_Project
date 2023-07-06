@@ -63,14 +63,14 @@ class UserTransactionController extends Controller
     public function store(Request $request, Voucher $voucher, Campaign $campaign)
     {
         $attributes = $request->validate([
-            'description' => 'required'
+            'scannedValue' => 'required'
         ]);
 
-        $code = $attributes['description'];
+        $code = $attributes['scannedValue'];
 
         $matched = $voucher->where('code', $code)->first();
 
-        if($matched == null){
+        if($matched === null){
             return back()->with('fail', 'No QR Code Found.');
         }
 
@@ -84,7 +84,7 @@ class UserTransactionController extends Controller
             Transaction::create([
                 'user_id' => $userId,
                 'points' => $points,
-                'description' => $attributes['description'],
+                'description' => $code,
             ]);
 
             $redeemed_at = $matched->redeemed_at = date('Y-m-d H:i:s', strtotime('now'));
@@ -97,5 +97,9 @@ class UserTransactionController extends Controller
         return back()->with('fail', 'Qr Code already scanned');
     }
 
+    public function scan(Request $request)
+    {
+        return $request->input('scannedValue');
+    }
 
 }
