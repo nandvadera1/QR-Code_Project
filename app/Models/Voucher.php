@@ -10,7 +10,7 @@ class Voucher extends Model
     use HasFactory;
 
     protected $fillable = [
-        'campaign_id', 'code'
+        'campaign_id', 'code', 'redeemed_by_user_id', 'redeemed_at'
     ];
     public function campaign()
     {
