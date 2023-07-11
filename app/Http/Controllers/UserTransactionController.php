@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\Transaction;
 use App\Models\Voucher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -70,11 +71,23 @@ class UserTransactionController extends Controller
 
         $matched = $voucher->where('code', $code)->first();
 
-        if($matched === null){
+        if($matched === null)
+        {
             return back()->with('fail', 'No QR Code Found.');
         }
 
-        if($matched->redeemed_at === null){
+        if (Carbon::now()->gt($matched->campaign->end_date))
+        {
+            return back()->with('fail', 'Coupon has expired');
+        }
+
+        if(!$matched->campaign->is_enabled)
+        {
+            return back()->with('fail', 'Coupon has not been enabled');
+        }
+
+        if($matched->redeemed_at === null)
+        {
             $campaign_id = $matched->campaign_id;
 
             $amount = $campaign->where('id', $campaign_id)->first();

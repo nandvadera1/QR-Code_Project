@@ -169,6 +169,15 @@
                         maxlength: 255
                     },
                     user_type_id: 'required',
+                    category_id: 'required',
+                    start_at: 'required',
+                    end_at: 'required',
+                    user_id: 'required',
+                    points: 'required',
+                    description: 'required',
+                    code: 'required',
+                    campaign_id: 'required',
+                    amount: 'required',
                 },
                 messages: {
                     name: 'Please enter your name',
@@ -182,6 +191,15 @@
                         maxlength: 'Password cannot exceed 7 characters'
                     },
                     user_type_id: 'Please enter your type',
+                    category_id: 'Please enter this field',
+                    start_at: 'Please enter this field',
+                    end_at: 'Please enter this field',
+                    user_id: 'Please enter this field',
+                    points: 'Please enter this field',
+                    description: 'Please enter this field',
+                    code: 'Please enter this field',
+                    amount: 'Please enter this field',
+                    campaign_id: 'Please enter this field',
                 },
                 submitHandler: function (form) {
                     form.submit();

@@ -319,6 +319,13 @@ return [
             'can'=> 'admin',
         ],
         [
+            'text' => 'Voucher Blocks',
+            'url' => '/admin/voucher_blocks',
+            'active' => ['/admin/voucher_blocks*'],
+            'icon' => 'fas fa-cubes',
+            'can'=> 'admin',
+        ],
+        [
             'text' => 'Vouchers',
             'url' => '/admin/vouchers',
             'active' => ['/admin/vouchers*'],
@@ -326,10 +333,10 @@ return [
             'can'=> 'admin',
         ],
         [
-            'text' => 'Transactions',
+            'text' => 'Transaction History',
             'url' => '/admin/transactions',
             'active' => ['/admin/transactions*'],
-            'icon' => 'fas fa-wallet',
+            'icon' => 'fas fa-history',
             'can'=> 'admin',
         ],
         [

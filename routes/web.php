@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTransactionController;
+use App\Http\Controllers\VoucherBlockController;
 use App\Http\Controllers\VouchersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,3 +58,8 @@ Route::group(['prefix'=>'user'],function (){
 });
 
 
+Route::get('/admin/voucher_blocks', [VoucherBlockController::class, 'index']);
+Route::get('/admin/voucher_blocks/create', [VoucherBlockController::class, 'create']);
+Route::post('/admin/voucher_blocks', [VoucherBlockController::class, 'store']);
+Route::get('/admin/voucher_blocks/download/{voucherBlock}', [VoucherBlockController::class, 'download']);
+Route::get('/admin/voucher_blocks/dataTable', [VoucherBlockController::class, 'dataTable']);
