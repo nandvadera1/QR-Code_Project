@@ -15,9 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Excel::class, function ($app) {
-            return new VouchersExport($app['phpexcel']);
-        });
+        //
     }
 
     /**
