@@ -39,6 +39,7 @@ Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
     Route::get('campaigns/dataTable',[CampaignController::class,'dataTable']);
     Route::get('vouchers/dataTable',[VouchersController::class,'dataTable']);
     Route::get('transactions/dataTable',[AdminTransactionController::class,'dataTable']);
+    Route::get('voucher_blocks/dataTable', [VoucherBlockController::class, 'dataTable']);
 
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class);
@@ -46,8 +47,10 @@ Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
     Route::resource('campaigns', CampaignController::class);
     Route::resource('vouchers', VouchersController::class);
     Route::resource('transactions', AdminTransactionController::class);
+    Route::resource('voucher_blocks', VoucherBlockController::class);
 
     Route::get('transactions/points/{user}', [AdminTransactionController::class, 'points']);
+    Route::get('voucher_blocks/download/{voucherBlock}', [VoucherBlockController::class, 'download']);
 });
 
 Route::group(['prefix'=>'user'],function (){
@@ -56,10 +59,3 @@ Route::group(['prefix'=>'user'],function (){
 
     Route::resource('transactions', UserTransactionController::class);
 });
-
-Route::get('/admin/voucher_blocks', [VoucherBlockController::class, 'index']);
-Route::get('/admin/voucher_blocks/create', [VoucherBlockController::class, 'create']);
-Route::post('/admin/voucher_blocks', [VoucherBlockController::class, 'store']);
-Route::get('/admin/voucher_blocks/download/{voucherBlock}', [VoucherBlockController::class, 'download']);
-Route::get('/admin/voucher_blocks/dataTable', [VoucherBlockController::class, 'dataTable']);
-
