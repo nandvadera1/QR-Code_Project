@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Exports\VouchersExport;
 use Illuminate\Support\ServiceProvider;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Excel::class, function ($app) {
+            return new VouchersExport($app['phpexcel']);
+        });
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Campaign;
 use App\Models\Voucher;
+use App\Models\VoucherBlock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -12,24 +13,27 @@ class VouchersController extends Controller
 {
     public function index()
     {
-        $campaigns = Campaign::all();
+        $voucher_blocks = VoucherBlock::all();
 
         return view('vouchers.index', [
-            'campaigns' => $campaigns
+            'voucher_blocks' => $voucher_blocks
         ]);
     }
 
     public function dataTable(Request $request)
     {
-        $campaignID = $request->input('campaign_id');
+        $voucher_blockId = $request->input('voucher_block_id');
 
-        $vouchers = Voucher::with('campaign', 'user')
-            ->when($campaignID, function ($query, $campaignID) {
-                return $query->where('campaign_id', $campaignID);
+        $vouchers = Voucher::with('voucher_block', 'user', 'campaign')
+            ->when($voucher_blockId, function ($query, $voucher_blockId) {
+                return $query->where('voucher_block_id', $voucher_blockId);
             })
-            ->select('id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id');
+            ->select('id', 'voucher_block_id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id');
 
         return DataTables::of($vouchers)
+            ->addColumn('voucher_block_id', function($row){
+                return $row->voucher_block->name;
+            })
             ->addColumn('campaign_id', function($row){
                 return $row->campaign->name;
             })
@@ -41,10 +45,10 @@ class VouchersController extends Controller
 
     public function create()
     {
-        $campaignId = Campaign::pluck('name', 'id');
+        $voucher_blockId = VoucherBlock::pluck('name', 'id');
 
         return view('vouchers.create', [
-           'campaignId' => $campaignId
+           'voucher_blocks' => $voucher_blockId
         ]);
     }
 

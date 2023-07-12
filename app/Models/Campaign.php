@@ -29,4 +29,9 @@ class Campaign extends Model
     public function vouchers(){
         return $this->hasMany(Voucher::class);
     }
+
+    public function voucher_blocks()
+    {
+        return $this->hasMany(VoucherBlock::class);
+    }
 }

@@ -22,5 +22,9 @@ class Voucher extends Model
         return $this->belongsTo(User::class, 'redeemed_by_user_id');
     }
 
+    public function voucher_block()
+    {
+        return $this->belongsTo(VoucherBlock::class);
+    }
 
 }

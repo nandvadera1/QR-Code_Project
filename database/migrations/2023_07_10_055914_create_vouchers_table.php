@@ -18,6 +18,7 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('campaign_id');
+            $table->unsignedBigInteger('voucher_block_id');
             $table->string('code', 16)->unique();
             $table->dateTime('redeemed_at')->nullable();
             $table->unsignedBigInteger('redeemed_by_user_id')->nullable();
@@ -27,6 +28,10 @@ class CreateVouchersTable extends Migration
                 ->references('id')
                 ->on('campaigns')->cascadeOnDelete();
 
+            $table->foreign('voucher_block_id')
+                ->references('id')
+                ->on('voucher_blocks')->cascadeOnDelete();
+
             $table->foreign('redeemed_by_user_id')
                 ->references('id')
                 ->on('users');
@@ -34,7 +39,7 @@ class CreateVouchersTable extends Migration
         });
 
         DB::unprepared('
-            CREATE PROCEDURE generate_vouchers(IN campaignId INT, IN numberOfVouchers INT)
+            CREATE PROCEDURE generate_vouchers(IN campaignId INT,IN voucher_blockId INT, IN numberOfVouchers INT)
             BEGIN
                 DECLARE chars VARCHAR(62);
                 DECLARE code VARCHAR(16);
@@ -48,7 +53,11 @@ class CreateVouchersTable extends Migration
                             SET code = CONCAT(code, SUBSTRING(chars, FLOOR(RAND() * 62) + 1, 1));
                         END WHILE;
 
+<<<<<<< HEAD:database/migrations/2023_06_26_055914_create_vouchers_table.php
                     INSERT INTO vouchers (campaign_id, code) VALUES (campaignId, code);
+=======
+                    INSERT INTO vouchers (campaign_id, voucher_block_id, code) VALUES (campaignID, voucher_blockId, code);
+>>>>>>> vouchers_block:database/migrations/2023_07_10_055914_create_vouchers_table.php
 
                     SET numberOfVouchers = numberOfVouchers - 1;
                 END WHILE;
