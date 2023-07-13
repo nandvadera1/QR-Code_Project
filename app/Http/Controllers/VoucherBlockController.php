@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Yajra\DataTables\Facades\DataTables;
 
 class VoucherBlockController extends Controller
@@ -89,6 +90,17 @@ class VoucherBlockController extends Controller
         $campaignID = $attributes['campaign_id'];
 
         DB::select("CALL generate_vouchers($campaignID, $voucher_blockId, $numberOfVouchers)");
+
+        $vouchers = Voucher::where('voucher_block_id', $voucher_blockId)->get();
+
+        foreach ($vouchers as $voucher) {
+            $imageName = 'qr_code_' . $voucher->id . '.png'; // Custom image name
+
+            $qrCode = QrCode::format('png')
+                ->size(200)
+                ->generate($voucher->code, public_path('qrcodes/' . $imageName));
+
+        }
 
         return redirect('admin/voucher_blocks')->with('success', 'Voucher Block created successfully');
     }
