@@ -35,7 +35,7 @@
                 {!! Form::select('category_id', $categoryType, $categoryID ?? null, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type']) !!}
             @endif
         </div>
-        @error('password')
+        @error('category_id')
         <p class="text-danger text-xs mt-1">
             {{ $message }}
         </p>

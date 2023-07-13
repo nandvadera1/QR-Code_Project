@@ -25,4 +25,13 @@ class Campaign extends Model
     {
         return $this->belongsToMany(Product::class, 'campaign_products');
     }
+
+    public function vouchers(){
+        return $this->hasMany(Voucher::class);
+    }
+
+    public function voucher_blocks()
+    {
+        return $this->hasMany(VoucherBlock::class);
+    }
 }

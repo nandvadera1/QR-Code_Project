@@ -40,7 +40,7 @@
         <div class="col-sm-10">
             {!! Form::select('user_type_id', $type, $user->user_type_id ?? null, ['class' => 'form-control', 'required', 'placeholder' => 'Select a type']) !!}
         </div>
-        @error('password')
+        @error('user_type_id')
         <p class="text-danger text-xs mt-1">
             {{ $message }}
         </p>
