@@ -53,11 +53,7 @@ class CreateVouchersTable extends Migration
                             SET code = CONCAT(code, SUBSTRING(chars, FLOOR(RAND() * 62) + 1, 1));
                         END WHILE;
 
-<<<<<<< HEAD:database/migrations/2023_06_26_055914_create_vouchers_table.php
-                    INSERT INTO vouchers (campaign_id, code) VALUES (campaignId, code);
-=======
                     INSERT INTO vouchers (campaign_id, voucher_block_id, code) VALUES (campaignID, voucher_blockId, code);
->>>>>>> vouchers_block:database/migrations/2023_07_10_055914_create_vouchers_table.php
 
                     SET numberOfVouchers = numberOfVouchers - 1;
                 END WHILE;
