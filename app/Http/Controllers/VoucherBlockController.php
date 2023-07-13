@@ -94,7 +94,7 @@ class VoucherBlockController extends Controller
         $vouchers = Voucher::where('voucher_block_id', $voucher_blockId)->get();
 
         foreach ($vouchers as $voucher) {
-            $imageName = 'qr_code_' . $voucher->id . '.png'; // Custom image name
+            $imageName = 'qr_code_' . $voucher->id . '.png';
 
             $qrCode = QrCode::format('png')
                 ->size(200)
