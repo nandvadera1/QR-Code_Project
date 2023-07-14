@@ -15,6 +15,8 @@ class PDFController extends Controller
 
         $voucher_blockName = $voucherBlock->name;
 
+        $voucher_blockDownloaded = $voucherBlock->download;
+
         $query = Voucher::query()
             ->select(['id', 'voucher_block_id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id'])
             ->where('voucher_block_id', $voucher_blockId);
@@ -30,7 +32,8 @@ class PDFController extends Controller
         return view('Pdf.pdf_view',[
             'vouchers' => $vouchers,
             'voucher_blockId' => $voucher_blockId,
-            'voucher_blockName' => $voucher_blockName
+            'voucher_blockName' => $voucher_blockName,
+            'voucher_blockDownloaded' => $voucher_blockDownloaded
         ]);
     }
 
