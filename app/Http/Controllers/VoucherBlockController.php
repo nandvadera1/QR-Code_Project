@@ -6,6 +6,7 @@ use App\Exports\VouchersExport;
 use App\Models\Campaign;
 use App\Models\Voucher;
 use App\Models\VoucherBlock;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -54,7 +55,8 @@ class VoucherBlockController extends Controller
                 return $row->campaign->name;
             })
             ->addColumn('download', function ($voucher_block) {
-                $btn = '<button class="btn btn-warning btn-sm btn_download" data-id="'. $voucher_block->id .'"  data-download="'. $voucher_block->download .'">Download</button>';
+//                $btn = '<button class="btn btn-warning btn-sm btn_download" data-id="'. $voucher_block->id .'"  data-download="'. $voucher_block->download .'">Download</button>';
+                $btn = '<a href="/admin/pdf/view/' . $voucher_block->id . '" class="btn btn-warning btn-sm">Show</a>';
                 return $btn;
             })
             ->rawColumns(['download'])
@@ -98,30 +100,49 @@ class VoucherBlockController extends Controller
 
             $qrCode = QrCode::format('png')
                 ->size(200)
-                ->generate($voucher->code, public_path('qrcodes/' . $imageName));
+                ->generate($voucher->code, public_path('images/' . $imageName));
 
         }
 
         return redirect('admin/voucher_blocks')->with('success', 'Voucher Block created successfully');
     }
 
-    public function download(VoucherBlock $voucherBlock)
-    {
-        $voucher_blockId = $voucherBlock->id;
-
-        $query = Voucher::query()
-            ->select(['voucher_block_id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id'])
-            ->where('voucher_block_id', $voucher_blockId);
-
-        $vouchers = $query->get();
-
-        $voucherBlock->update([
-            'downloaded_at' => now(),
-            'download' => 1
-        ]);
-
-
-        return Excel::download(new VouchersExport($vouchers), 'vouchers_'.$voucher_blockId.'.xlsx');
-    }
+//    public function download(VoucherBlock $voucherBlock)
+//    {
+//        $voucher_blockId = $voucherBlock->id;
+//
+//        $query = Voucher::query()
+//            ->select(['id', 'voucher_block_id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id'])
+//            ->where('voucher_block_id', $voucher_blockId);
+//
+//        $vouchers = $query->get();
+//
+//        $voucherBlock->update([
+//            'downloaded_at' => now(),
+//            'download' => 1
+//        ]);
+//
+//        return view('voucher_blocks.pdf', [
+//            'vouchers' => $vouchers,
+//            'voucher_blockId' => $voucher_blockId
+//        ]);
+//    }
+//
+//    public function generatepdf()
+//    {
+////        $voucher_blockId = $voucherBlock->id;
+////
+////        $query = Voucher::query()
+////            ->select(['id', 'voucher_block_id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id'])
+////            ->where('voucher_block_id', $voucher_blockId);
+////
+////        $vouchers = $query->get();
+//
+//        $data = ['title' => 'Welcome to ItSolutionStuff.com'];
+//
+//        $pdf = PDF::loadView('voucher_blocks.pdf', $data);
+//
+//        return $pdf->download('qrcodes.pdf');
+//    }
 
 }
