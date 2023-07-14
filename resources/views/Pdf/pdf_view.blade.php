@@ -16,6 +16,9 @@
 <script>
     var downloadCount = 0;
 
+    // Here put one more validation for checking in the database because if someone by mistake refresh the same page and download
+    // so there would be problem.
+
     function confirmDownload() {
         if (downloadCount === 0) {
             downloadCount++;

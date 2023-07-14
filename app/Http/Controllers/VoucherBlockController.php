@@ -55,8 +55,8 @@ class VoucherBlockController extends Controller
                 return $row->campaign->name;
             })
             ->addColumn('download', function ($voucher_block) {
-//                $btn = '<button class="btn btn-warning btn-sm btn_download" data-id="'. $voucher_block->id .'"  data-download="'. $voucher_block->download .'">Download</button>';
-                $btn = '<a href="/admin/pdf/view/' . $voucher_block->id . '" class="btn btn-warning btn-sm">Display</a>';
+                $btn = '<button class="btn btn-warning btn-sm btn_download" data-id="'. $voucher_block->id .'"  data-download="'. $voucher_block->download .'">Download</button>';
+//                $btn = '<a href="/admin/pdf/view/' . $voucher_block->id . '" class="btn btn-warning btn-sm">Display</a>';
                 return $btn;
             })
             ->rawColumns(['download'])

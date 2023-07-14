@@ -23,12 +23,6 @@ class PDFController extends Controller
 
         $vouchers = $query->get();
 
-        $voucherBlock->update([
-            'downloaded_at' => now(),
-            'download' => 1
-        ]);
-
-
         return view('Pdf.pdf_view',[
             'vouchers' => $vouchers,
             'voucher_blockId' => $voucher_blockId,
@@ -47,6 +41,11 @@ class PDFController extends Controller
             ->where('voucher_block_id', $voucher_blockId);
 
         $vouchers = $query->get();
+
+        $voucherBlock->update([
+            'downloaded_at' => now(),
+            'download' => 1
+        ]);
 
         $pdf_view = PDF::loadView('Pdf.pdf_convert', compact('vouchers', 'voucher_blockId', 'voucher_blockName'));
 
