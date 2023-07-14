@@ -47,10 +47,14 @@ Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
     Route::resource('campaigns', CampaignController::class);
     Route::resource('vouchers', VouchersController::class);
     Route::resource('transactions', AdminTransactionController::class);
-    Route::resource('voucher_blocks', VoucherBlockController::class);
+//    Route::resource('voucher_blocks', VoucherBlockController::class);
 
     Route::get('transactions/points/{user}', [AdminTransactionController::class, 'points']);
-    Route::get('voucher_blocks/download/{voucherBlock}', [VoucherBlockController::class, 'download']);
+//    Route::get('voucher_blocks/download/{voucherBlock}', [VoucherBlockController::class, 'download']);
+//    Route::get('voucher_blocks/generatepdf', [VoucherBlockController::class, 'generatepdf']);
+    Route::get('voucher_blocks', [VoucherBlockController::class, 'index']);
+    Route::get('voucher_blocks/create', [VoucherBlockController::class, 'create']);
+    Route::post('voucher_blocks', [VoucherBlockController::class, 'store']);
 });
 
 Route::group(['prefix'=>'user'],function (){
@@ -59,3 +63,6 @@ Route::group(['prefix'=>'user'],function (){
 
     Route::resource('transactions', UserTransactionController::class);
 });
+
+Route::get('admin/pdf/view/{voucherBlock}', [\App\Http\Controllers\PDFController::class, 'pdfView'])->name('pdf.view');
+Route::get('admin/pdf/convert/{voucherBlock}', [\App\Http\Controllers\PDFController::class, 'pdfGenerate'])->name('pdf.convert');

@@ -39,37 +39,37 @@
 @stop
 
 @section('js')
-<script>
-    $(document).ready(function () {
-        $('#table1').on('click', '.btn_download', function () {
-            var id = $(this).data('id');
-            var download = $(this).data('download');
-            var url = "/admin/voucher_blocks/download/" + id;
-            var token = $("meta[name='csrf-token']").attr("content");
-            $.ajax(
-                {
-                    url: url,
-                    type: 'GET',
-                    data: {
-                        "id": id,
-                        "_token": token,
-                    },
-                    success: function (response) {
-                        if(download){
-                            var confirmation = confirm("Are you sure you want to download this again?");
-                            if(confirmation){
-                                window.location.href = "/admin/voucher_blocks/download/" + id;
-                            }
-                        }
-                        else{
-                            window.location.href = "/admin/voucher_blocks/download/" + id;
-                        }
-                    }
-                });
-            $('#table1').DataTable().ajax.reload();
-        });
-    });
-</script>
+{{--<script>--}}
+{{--    $(document).ready(function () {--}}
+{{--        $('#table1').on('click', '.btn_download', function () {--}}
+{{--            var id = $(this).data('id');--}}
+{{--            var download = $(this).data('download');--}}
+{{--            var url = "/admin/voucher_blocks/download/" + id;--}}
+{{--            var token = $("meta[name='csrf-token']").attr("content");--}}
+{{--            $.ajax(--}}
+{{--                {--}}
+{{--                    url: url,--}}
+{{--                    type: 'GET',--}}
+{{--                    data: {--}}
+{{--                        "id": id,--}}
+{{--                        "_token": token,--}}
+{{--                    },--}}
+{{--                    success: function (response) {--}}
+{{--                        if(download){--}}
+{{--                            var confirmation = confirm("Are you sure you want to download this again?");--}}
+{{--                            if(confirmation){--}}
+{{--                                window.location.href = "/admin/voucher_blocks/download/" + id;--}}
+{{--                            }--}}
+{{--                        }--}}
+{{--                        else{--}}
+{{--                            window.location.href = "/admin/voucher_blocks/download/" + id;--}}
+{{--                        }--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            $('#table1').DataTable().ajax.reload();--}}
+{{--        });--}}
+{{--    });--}}
+{{--</script>--}}
 
 @endsection
 
