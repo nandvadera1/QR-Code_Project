@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateVoucherBlocksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('voucher_blocks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_type_id')->default(2);
+            $table->unsignedBigInteger('campaign_id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->dateTime('downloaded_at')->nullable();
+            $table->boolean('download')->default(0);
             $table->timestamps();
 
-            $table->foreign('user_type_id')
+            $table->foreign('campaign_id')
                 ->references('id')
-                ->on('user_types');
+                ->on('campaigns')->cascadeOnDelete();
         });
     }
 
@@ -36,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('voucher_blocks');
     }
 }

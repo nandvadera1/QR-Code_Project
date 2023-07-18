@@ -7,7 +7,21 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+
+    @can('admin')
+    <p>Welcome to this beautiful dashboard</p>
+    @endcan
+
+    @can('user')
+    <div class="info-box bg-warning" style="width: 30%; height: 200px;">
+        <h1 class="info-box-icon" style="font-size: 60px;"><i class="far fa-flag"></i></h1>
+        <div class="info-box-content">
+            <h1 class="info-box-text">Points</h1>
+            <h1 class="info-box-number">{{ $points }}</h1>
+        </div>
+    </div>
+    @endcan
+
 @stop
 
 @section('css')
