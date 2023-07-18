@@ -6,10 +6,12 @@ use App\Exports\VouchersExport;
 use App\Models\Campaign;
 use App\Models\Voucher;
 use App\Models\VoucherBlock;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Yajra\DataTables\Facades\DataTables;
 
 class VoucherBlockController extends Controller
@@ -54,6 +56,7 @@ class VoucherBlockController extends Controller
             })
             ->addColumn('download', function ($voucher_block) {
                 $btn = '<button class="btn btn-warning btn-sm btn_download" data-id="'. $voucher_block->id .'"  data-download="'. $voucher_block->download .'">Download</button>';
+//                $btn = '<a href="/admin/pdf/view/' . $voucher_block->id . '" class="btn btn-warning btn-sm">Display</a>';
                 return $btn;
             })
             ->rawColumns(['download'])
@@ -90,26 +93,18 @@ class VoucherBlockController extends Controller
 
         DB::select("CALL generate_vouchers($campaignID, $voucher_blockId, $numberOfVouchers)");
 
+        $vouchers = Voucher::where('voucher_block_id', $voucher_blockId)->get();
+
+        foreach ($vouchers as $voucher) {
+            $imageName = 'qr_code_' . $voucher->id . '.png';
+
+            $qrCode = QrCode::format('png')
+                ->size(200)
+                ->generate($voucher->code, public_path('images/' . $imageName));
+
+        }
+
         return redirect('admin/voucher_blocks')->with('success', 'Voucher Block created successfully');
-    }
-
-    public function download(VoucherBlock $voucherBlock)
-    {
-        $voucher_blockId = $voucherBlock->id;
-
-        $query = Voucher::query()
-            ->select(['voucher_block_id', 'campaign_id', 'code', 'redeemed_at', 'redeemed_by_user_id'])
-            ->where('voucher_block_id', $voucher_blockId);
-
-        $vouchers = $query->get();
-
-        $voucherBlock->update([
-            'downloaded_at' => now(),
-            'download' => 1
-        ]);
-
-
-        return Excel::download(new VouchersExport($vouchers), 'vouchers_'.$voucher_blockId.'.xlsx');
     }
 
 }
