@@ -10,7 +10,6 @@ use App\Http\Controllers\UserTransactionController;
 use App\Http\Controllers\VoucherBlockController;
 use App\Http\Controllers\VouchersController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
