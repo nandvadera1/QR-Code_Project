@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminTransactionController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTransactionController;
@@ -83,5 +84,5 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 //    return back()->with('message', 'Verification link sent!');
 //})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::get('admin/pdf/view/{voucherBlock}', [\App\Http\Controllers\PDFController::class, 'pdfView'])->name('pdf.view');
-Route::get('admin/pdf/convert/{voucherBlock}', [\App\Http\Controllers\PDFController::class, 'pdfGenerate'])->name('pdf.convert');
+Route::get('admin/pdf/view/{voucherBlock}', [PDFController::class, 'pdfView'])->name('pdf.view');
+Route::get('admin/pdf/convert/{voucherBlock}', [PDFController::class, 'pdfGenerate'])->name('pdf.convert');

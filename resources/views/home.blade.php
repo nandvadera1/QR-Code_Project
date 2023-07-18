@@ -13,7 +13,7 @@
     @endcan
 
     @can('user')
-    <div class="info-box bg-warning" style="width: 30%; height: 200px;">
+    <div class="info-box bg-primary" style="width: 30%; height: 200px;">
         <h1 class="info-box-icon" style="font-size: 60px;"><i class="far fa-flag"></i></h1>
         <div class="info-box-content">
             <h1 class="info-box-text">Points</h1>
@@ -22,12 +22,4 @@
     </div>
     @endcan
 
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
 @stop
