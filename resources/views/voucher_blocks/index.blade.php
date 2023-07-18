@@ -44,7 +44,7 @@
         $('#table1').on('click', '.btn_download', function () {
             var id = $(this).data('id');
             var download = $(this).data('download');
-            var url = "/admin/voucher_blocks/download/" + id;
+            var url = "/admin/pdf/view/" + id;
             var token = $("meta[name='csrf-token']").attr("content");
             $.ajax(
                 {
@@ -58,11 +58,11 @@
                         if(download){
                             var confirmation = confirm("Are you sure you want to download this again?");
                             if(confirmation){
-                                window.location.href = "/admin/voucher_blocks/download/" + id;
+                                window.location.href = "/admin/pdf/view/" + id;
                             }
                         }
                         else{
-                            window.location.href = "/admin/voucher_blocks/download/" + id;
+                            window.location.href = "/admin/pdf/view/" + id;
                         }
                     }
                 });
