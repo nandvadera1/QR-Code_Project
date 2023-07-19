@@ -99,7 +99,8 @@ class VoucherBlockController extends Controller
             $imageName = 'qr_code_' . $voucher->id . '.png';
 
             $qrCode = QrCode::format('png')
-                ->size(200)
+                ->size(75)
+                ->margin(2) // Adjust the margin value here (e.g., 2)
                 ->generate($voucher->code, public_path('images/' . $imageName));
 
         }

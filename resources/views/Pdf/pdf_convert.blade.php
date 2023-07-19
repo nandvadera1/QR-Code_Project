@@ -9,7 +9,7 @@
 
     @foreach ($vouchers as $voucher)
         <img src="{{ public_path('images/qr_code_'.$voucher->id.'.png') }}"
-             style="width: 100px; height: 100px; margin: 5px">
+             style="width: 100px; height: 100px; margin: 2px">
     @endforeach
 </body>
 </html>
