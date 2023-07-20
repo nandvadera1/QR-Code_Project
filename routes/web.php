@@ -36,7 +36,7 @@ Auth::routes([
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['can:admin', 'verified']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['can:admin']], function () {
     Route::get('users/dataTable',[UserController::class,'dataTable']);
     Route::get('categories/dataTable',[CategoryController::class,'dataTable']);
     Route::get('products/dataTable', [ProductController::class, 'dataTable']);
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:admin', 'verified']], f
     Route::get('pdf/convert/{voucherBlock}', [PDFController::class, 'pdfGenerate'])->name('pdf.convert');
 });
 
-Route::group(['prefix'=>'user', 'middleware' => 'verified'],function (){
+Route::group(['prefix'=>'user'],function (){
     Route::get('transactions/dataTable',[UserTransactionController::class,'dataTable']);
     Route::post('transactions/points', [UserTransactionController::class, 'scan']);
 

@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\VouchersExport;
 use App\Models\Campaign;
 use App\Models\Voucher;
 use App\Models\VoucherBlock;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
-use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -96,7 +93,8 @@ class VoucherBlockController extends Controller
         $vouchers = Voucher::where('voucher_block_id', $voucher_blockId)->get();
 
         foreach ($vouchers as $voucher) {
-            $imageName = 'qr_code_' . $voucher->id . '.png';
+            $dateString = Carbon::now()->format('Y-m-d');
+            $imageName = 'qr_code_' . $voucher->id . '_' . $dateString . '.png';
 
             $qrCode = QrCode::format('png')
                 ->size(75)
