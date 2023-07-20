@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('vendor.adminlte.auth.login');
 });
 
 Auth::routes([
@@ -36,7 +36,7 @@ Auth::routes([
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
-Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
+Route::group(['prefix' => 'admin', 'middleware' => ['can:admin', 'verified']], function () {
     Route::get('users/dataTable',[UserController::class,'dataTable']);
     Route::get('categories/dataTable',[CategoryController::class,'dataTable']);
     Route::get('products/dataTable', [ProductController::class, 'dataTable']);
@@ -59,9 +59,13 @@ Route::group(['prefix'=>'admin', 'middleware' => 'can:admin'],function (){
     Route::get('voucher_blocks', [VoucherBlockController::class, 'index']);
     Route::get('voucher_blocks/create', [VoucherBlockController::class, 'create']);
     Route::post('voucher_blocks', [VoucherBlockController::class, 'store']);
+
+
+    Route::get('pdf/view/{voucherBlock}', [PDFController::class, 'pdfView'])->name('pdf.view');
+    Route::get('pdf/convert/{voucherBlock}', [PDFController::class, 'pdfGenerate'])->name('pdf.convert');
 });
 
-Route::group(['prefix'=>'user'],function (){
+Route::group(['prefix'=>'user', 'middleware' => 'verified'],function (){
     Route::get('transactions/dataTable',[UserTransactionController::class,'dataTable']);
     Route::post('transactions/points', [UserTransactionController::class, 'scan']);
 
@@ -83,6 +87,3 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 //
 //    return back()->with('message', 'Verification link sent!');
 //})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-Route::get('admin/pdf/view/{voucherBlock}', [PDFController::class, 'pdfView'])->name('pdf.view');
-Route::get('admin/pdf/convert/{voucherBlock}', [PDFController::class, 'pdfGenerate'])->name('pdf.convert');
