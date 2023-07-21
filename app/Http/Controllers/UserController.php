@@ -58,7 +58,7 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'phone_number' => 'required|numeric|digits:10',
             'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|min:7|max:255',
+            'password' => 'required|min:8|max:255',
             'user_type_id' => 'required',
             'verified' => 'required',
         ]);
@@ -85,7 +85,7 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'phone_number' => 'required|numeric|digits:10',
             'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
-            'password' => 'required|min:7|max:10',
+            'password' => 'required|min:8|max:10',
             'user_type_id' => 'required',
             'verified' => 'required',
         ]);

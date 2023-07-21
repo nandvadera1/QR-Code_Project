@@ -170,8 +170,8 @@
                     },
                     password: {
                         required: true,
-                        minlength: 7,
-                        maxlength: 255
+                        minlength: 8,
+                        maxlength: 10,
                     },
                     user_type_id: 'required',
                     category_id: 'required',
@@ -192,7 +192,7 @@
                     },
                     password: {
                         required: 'Please enter your password',
-                        minlength: 'Password must be at least 7 characters long',
+                        minlength: 'Password must be at least 8 characters long',
                         maxlength: 'Password cannot exceed 10 characters'
                     },
                     user_type_id: 'Please enter your type',

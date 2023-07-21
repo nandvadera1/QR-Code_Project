@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
             'phone_number' => 7016588443,
             'email' => 'nandvadera25@gmail.com',
-            'password' => Hash::make('secret'),
+            'password' => Hash::make('secret12345'),
             'verified' => 1,
         ]);
 
