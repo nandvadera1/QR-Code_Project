@@ -94,7 +94,7 @@ class VoucherBlockController extends Controller
 
         foreach ($vouchers as $voucher) {
             $dateString = Carbon::now()->format('Y-m-d');
-            $imageName = 'qr_code_' . $voucher->id . '_' . $dateString . '.png';
+            $imageName = 'qr_code_' . $voucher->id . '.png';
 
             $qrCode = QrCode::format('png')
                 ->size(75)
