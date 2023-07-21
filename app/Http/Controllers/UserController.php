@@ -90,7 +90,7 @@ class UserController extends Controller
             'verified' => 'required',
         ]);
 
-        $attributes['password'] = Hash::make($attributes['password']);
+//        $attributes['password'] = Hash::make($attributes['password']);
 
         $user->update($attributes);
 
