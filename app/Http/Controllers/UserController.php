@@ -22,7 +22,9 @@ class UserController extends Controller
         $heads = [
             'Type',
             'Name',
+            'Phone Number',
             'Email',
+            'Verified',
             ['label' => 'Edit', 'no-export' => true, 'width' => 5],
             ['label' => 'Delete', 'no-export' => true, 'width' => 5],
         ];
@@ -34,7 +36,9 @@ class UserController extends Controller
             'columns' => [
                 ['data' => 'type.type', 'name' => 'type.type'],
                 ['data' => 'name', 'name' => 'name'],
+                ['data' => 'phone_number', 'name' => 'phone_number'],
                 ['data' => 'email', 'name' => 'email'],
+                ['data' => 'verified', 'name' => 'verified'],
                 ['data' => 'edit', 'name' => 'edit', 'orderable' => false, 'searchable' => false],
                 ['data' => 'delete', 'name' => 'delete', 'orderable' => false, 'searchable' => false],
             ]
@@ -52,9 +56,11 @@ class UserController extends Controller
     {
         $attributes = request()->validate([
             'name' => 'required|max:255',
+            'phone_number' => 'required|numeric|digits:10',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:7|max:255',
-            'user_type_id' => 'required'
+            'user_type_id' => 'required',
+            'verified' => 'required',
         ]);
 
         $attributes['password'] = Hash::make($attributes['password']);
@@ -77,9 +83,11 @@ class UserController extends Controller
     {
         $attributes = request()->validate([
             'name' => 'required|max:255',
+            'phone_number' => 'required|numeric|digits:10',
             'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
-            'password' => 'required|min:7|max:255',
+            'password' => 'required|min:7|max:10',
             'user_type_id' => 'required',
+            'verified' => 'required',
         ]);
 
         $attributes['password'] = Hash::make($attributes['password']);
@@ -98,7 +106,7 @@ class UserController extends Controller
 
     public function dataTable()
     {
-        $users = User::with('type')->select('id','user_type_id', 'name', 'email')->get();
+        $users = User::with('type')->select('id','user_type_id', 'name', 'phone_number', 'email', 'verified')->get();
 
         return DataTables::of($users)
             ->addColumn('edit', function ($user) {

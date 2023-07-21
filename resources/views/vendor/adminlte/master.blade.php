@@ -159,6 +159,11 @@
             $('#validate').validate({
                 rules: {
                     name: 'required',
+                    phone_number: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10,
+                    },
                     email: {
                         required: true,
                         email: true
@@ -187,8 +192,8 @@
                     },
                     password: {
                         required: 'Please enter your password',
-                        minlength: 'Password must be at least 3 characters long',
-                        maxlength: 'Password cannot exceed 7 characters'
+                        minlength: 'Password must be at least 7 characters long',
+                        maxlength: 'Password cannot exceed 10 characters'
                     },
                     user_type_id: 'Please enter your type',
                     category_id: 'Please enter this field',
