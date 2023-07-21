@@ -35,17 +35,19 @@
         @enderror
     </div>
 
-    <div class="form-group row">
-        {!! Form::label('password', 'Password', ['class' => 'col-sm-2 col-form-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::password('password', ['class' => 'form-control', 'required', 'placeholder' => "Password"]) !!}
+    @if (isset($newUser) )
+        <div class="form-group row">
+            {!! Form::label('password', 'Password', ['class' => 'col-sm-2 col-form-label']) !!}
+            <div class="col-sm-10">
+                {!! Form::password('password', ['class' => 'form-control', 'required', 'placeholder' => "Password"]) !!}
+            </div>
+            @error('password')
+            <p class="text-danger text-xs mt-1">
+                {{ $message }}
+            </p>
+            @enderror
         </div>
-        @error('password')
-        <p class="text-danger text-xs mt-1">
-            {{ $message }}
-        </p>
-        @enderror
-    </div>
+    @endif
 
     <div class="form-group row">
         {!! Form::label('user_type_id', 'Type', ['class' => 'col-sm-2 col-form-label']) !!}

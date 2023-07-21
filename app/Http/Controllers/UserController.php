@@ -49,7 +49,8 @@ class UserController extends Controller
     public function create()
     {
         $type = UserType::pluck('type', 'id');
-        return view('users.create', compact('type'));
+        $newUser = true;
+        return view('users.create', compact('type', 'newUser'));
     }
 
     public function store(Request $request)
