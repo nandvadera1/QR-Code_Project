@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\UserType;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -25,6 +26,7 @@ class UserController extends Controller
             'Phone Number',
             'Email',
             'Verified',
+            ['label' => 'Points', 'no-export' => true, 'width' => 5],
             ['label' => 'Edit', 'no-export' => true, 'width' => 5],
             ['label' => 'Delete', 'no-export' => true, 'width' => 5],
         ];
@@ -39,6 +41,7 @@ class UserController extends Controller
                 ['data' => 'phone_number', 'name' => 'phone_number'],
                 ['data' => 'email', 'name' => 'email'],
                 ['data' => 'verified', 'name' => 'verified'],
+                ['data' => 'Points', 'name' => 'Points'],
                 ['data' => 'edit', 'name' => 'edit', 'orderable' => false, 'searchable' => false],
                 ['data' => 'delete', 'name' => 'delete', 'orderable' => false, 'searchable' => false],
             ]
@@ -117,7 +120,11 @@ class UserController extends Controller
                 $btn = '<button class="btn btn-danger btn-sm btn_delete " data-id="' . $user->id . '">Delete</button>';
                 return $btn;
             })
-            ->rawColumns(['edit','delete'])
+            ->addColumn('Points', function ($user) {
+                $points = Transaction::where('user_id', $user->id)->sum('points');
+                return $points;
+            })
+            ->rawColumns(['edit','delete','Points'])
             ->make(true);
     }
 }

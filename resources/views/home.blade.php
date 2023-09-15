@@ -10,6 +10,10 @@
 
     @can('admin')
     <p>Welcome to this beautiful dashboard</p>
+    <!-- resources/views/backup/download.blade.php -->
+
+<a href="{{ route('backup.download') }}" class="btn btn-primary">Download Backup</a>
+
     @endcan
 
     @can('user')

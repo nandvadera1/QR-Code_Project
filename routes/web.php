@@ -13,6 +13,7 @@ use App\Http\Controllers\VouchersController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BackupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,3 +88,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 //
 //    return back()->with('message', 'Verification link sent!');
 //})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+Route::get('/download-backup', [BackupController::class, 'downloadBackup'])->name('backup.download');
