@@ -13,6 +13,7 @@ use App\Http\Controllers\VouchersController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BackupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Auth::routes([
     'verify' => true
 ]);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['verified', 'user_verified']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['can:admin', 'verified']], function () {
     Route::get('users/dataTable',[UserController::class,'dataTable']);
@@ -65,7 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:admin', 'verified']], f
     Route::get('pdf/convert/{voucherBlock}', [PDFController::class, 'pdfGenerate'])->name('pdf.convert');
 });
 
-Route::group(['prefix'=>'user', 'middleware' => 'verified'],function (){
+Route::group(['prefix'=>'user', 'middleware' => ['user_verified', 'verified']],function (){
     Route::get('transactions/dataTable',[UserTransactionController::class,'dataTable']);
     Route::post('transactions/points', [UserTransactionController::class, 'scan']);
 
@@ -87,3 +88,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 //
 //    return back()->with('message', 'Verification link sent!');
 //})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+Route::get('/download-backup', [BackupController::class, 'downloadBackup'])->name('backup.download');

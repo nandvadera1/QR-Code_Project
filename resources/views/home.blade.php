@@ -10,10 +10,14 @@
 
     @can('admin')
     <p>Welcome to this beautiful dashboard</p>
+    <!-- resources/views/backup/download.blade.php -->
+
+<a href="{{ route('backup.download') }}" class="btn btn-primary">Download Backup</a>
+
     @endcan
 
     @can('user')
-    <div class="info-box bg-primary" style="width: 30%; height: 200px;">
+    <div class="info-box bg-primary" style="width: 100%; height: 200px;">
         <h1 class="info-box-icon" style="font-size: 60px;"><i class="far fa-flag"></i></h1>
         <div class="info-box-content">
             <h1 class="info-box-text">Points</h1>

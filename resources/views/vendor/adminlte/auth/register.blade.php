@@ -35,6 +35,24 @@
             @enderror
         </div>
 
+        {{-- Phone number field --}}
+        <div class="input-group mb-3">
+            <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror"
+                   value="{{ old('phone_number') }}" placeholder="{{ __('Phone Number') }}">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-phone {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('phone_number')
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+            @enderror
+        </div>
+
         {{-- Email field --}}
         <div class="input-group mb-3">
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"

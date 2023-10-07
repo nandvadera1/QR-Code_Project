@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\UserType;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -22,7 +23,10 @@ class UserController extends Controller
         $heads = [
             'Type',
             'Name',
+            'Phone Number',
             'Email',
+            'Verified',
+            ['label' => 'Points', 'no-export' => true, 'width' => 5],
             ['label' => 'Edit', 'no-export' => true, 'width' => 5],
             ['label' => 'Delete', 'no-export' => true, 'width' => 5],
         ];
@@ -34,7 +38,10 @@ class UserController extends Controller
             'columns' => [
                 ['data' => 'type.type', 'name' => 'type.type'],
                 ['data' => 'name', 'name' => 'name'],
+                ['data' => 'phone_number', 'name' => 'phone_number'],
                 ['data' => 'email', 'name' => 'email'],
+                ['data' => 'verified', 'name' => 'verified'],
+                ['data' => 'Points', 'name' => 'Points'],
                 ['data' => 'edit', 'name' => 'edit', 'orderable' => false, 'searchable' => false],
                 ['data' => 'delete', 'name' => 'delete', 'orderable' => false, 'searchable' => false],
             ]
@@ -45,16 +52,19 @@ class UserController extends Controller
     public function create()
     {
         $type = UserType::pluck('type', 'id');
-        return view('users.create', compact('type'));
+        $newUser = true;
+        return view('users.create', compact('type', 'newUser'));
     }
 
     public function store(Request $request)
     {
         $attributes = request()->validate([
             'name' => 'required|max:255',
+            'phone_number' => 'required|numeric|digits:10',
             'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|min:7|max:255',
-            'user_type_id' => 'required'
+            'password' => 'required|min:8|max:255',
+            'user_type_id' => 'required',
+            'verified' => 'required',
         ]);
 
         $attributes['password'] = Hash::make($attributes['password']);
@@ -77,12 +87,13 @@ class UserController extends Controller
     {
         $attributes = request()->validate([
             'name' => 'required|max:255',
+            'phone_number' => 'required|numeric|digits:10',
             'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
-            'password' => 'required|min:7|max:255',
             'user_type_id' => 'required',
+            'verified' => 'required',
         ]);
 
-        $attributes['password'] = Hash::make($attributes['password']);
+//        $attributes['password'] = Hash::make($attributes['password']);
 
         $user->update($attributes);
 
@@ -98,7 +109,7 @@ class UserController extends Controller
 
     public function dataTable()
     {
-        $users = User::with('type')->select('id','user_type_id', 'name', 'email')->get();
+        $users = User::with('type')->select('id','user_type_id', 'name', 'phone_number', 'email', 'verified')->get();
 
         return DataTables::of($users)
             ->addColumn('edit', function ($user) {
@@ -109,7 +120,11 @@ class UserController extends Controller
                 $btn = '<button class="btn btn-danger btn-sm btn_delete " data-id="' . $user->id . '">Delete</button>';
                 return $btn;
             })
-            ->rawColumns(['edit','delete'])
+            ->addColumn('Points', function ($user) {
+                $points = Transaction::where('user_id', $user->id)->sum('points');
+                return $points;
+            })
+            ->rawColumns(['edit','delete','Points'])
             ->make(true);
     }
 }
