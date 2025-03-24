@@ -91,3 +91,4 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 
 Route::get('/download-backup', [BackupController::class, 'downloadBackup'])->name('backup.download');
+Route::get('/backup-database', [BackupController::class, 'downloadBackupNew']);
