@@ -67,4 +67,19 @@ class BackupController extends Controller
            readfile($file_name);
            unlink($file_name);
     }
+
+    public function downloadBackupNew()
+    {
+        $database = env('DB_DATABASE');
+        $user = env('DB_USERNAME');
+        $password = env('DB_PASSWORD');
+        $host = env('DB_HOST');
+
+        $backupFile = storage_path("app/backup.sql");
+
+        $command = "mysqldump --user={$user} --password={$password} --host={$host} {$database} > {$backupFile}";
+        system($command);
+
+        return response()->download($backupFile)->deleteFileAfterSend(true);
+    }
 }
