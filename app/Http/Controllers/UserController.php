@@ -97,10 +97,13 @@ class UserController extends Controller
             'user_type_id' => 'required',
             'verified' => 'required',
             'email_verified' => 'nullable',
+            'password' => 'nullable|min:6',
         ]);
 
-        if(!empty($request->password)){
-            $attributes['password'] = Hash::make($request->password);
+        if (!empty($attributes['password'])) {
+            $attributes['password'] = Hash::make($attributes['password']);
+        } else {
+            unset($attributes['password']);
         }
 
         if(!empty($attributes['email_verified'])){
