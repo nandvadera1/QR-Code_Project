@@ -35,19 +35,17 @@
         @enderror
     </div>
 
-    @if (isset($newUser) )
-        <div class="form-group row">
-            {!! Form::label('password', 'Password', ['class' => 'col-sm-2 col-form-label']) !!}
-            <div class="col-sm-10">
-                {!! Form::password('password', ['class' => 'form-control', 'required', 'placeholder' => "Password"]) !!}
-            </div>
-            @error('password')
-            <p class="text-danger text-xs mt-1">
-                {{ $message }}
-            </p>
-            @enderror
+    <div class="form-group row">
+        {!! Form::label('password', 'Password', ['class' => 'col-sm-2 col-form-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => "Password"]) !!}
         </div>
-    @endif
+        @error('password')
+        <p class="text-danger text-xs mt-1">
+            {{ $message }}
+        </p>
+        @enderror
+    </div>
 
     <div class="form-group row">
         {!! Form::label('user_type_id', 'Type', ['class' => 'col-sm-2 col-form-label']) !!}
@@ -70,6 +68,21 @@
             </div>
         </div>
         @error('verified')
+        <p class="text-danger text-xs mt-1">
+            {{ $message }}
+        </p>
+        @enderror
+    </div>
+
+    <div class="form-group row">
+        {!! Form::label('email_verified', 'Email Verified', ['class' => 'col-sm-2 col-form-label']) !!}
+        <div class="col-sm-10">
+            <div class="form-check">
+                {!! Form::hidden('email_verified', 0) !!}
+                {!! Form::checkbox('email_verified', 1, isset($user) ? $user->email_verified : null, ['class' => 'form-check-input', 'id' => 'email_verified_checkbox']) !!}
+            </div>
+        </div>
+        @error('email_verified')
         <p class="text-danger text-xs mt-1">
             {{ $message }}
         </p>

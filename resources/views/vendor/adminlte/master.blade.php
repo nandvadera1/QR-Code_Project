@@ -169,7 +169,7 @@
                         email: true
                     },
                     password: {
-                        required: true,
+                        // required: true,
                         minlength: 8,
                         maxlength: 10,
                     },

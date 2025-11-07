@@ -77,6 +77,11 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $type = UserType::pluck('type', 'id');
+        if (!empty($user->email_verified_at)) {
+            $user->email_verified = 1;
+        } else {
+            $user->email_verified = 0;
+        }
         return view('users.edit', [
             'type' => $type,
             'user' => $user
@@ -91,9 +96,20 @@ class UserController extends Controller
             'email' => ['required', Rule::unique('users', 'email')->ignore($user->id)],
             'user_type_id' => 'required',
             'verified' => 'required',
+            'email_verified' => 'nullable',
         ]);
 
-//        $attributes['password'] = Hash::make($attributes['password']);
+        if(!empty($request->password)){
+            $attributes['password'] = Hash::make($request->password);
+        }
+
+        if(!empty($attributes['email_verified'])){
+            if(empty($user->email_verified_at)){
+                $attributes['email_verified_at'] = now();
+            }
+        } else {
+            $attributes['email_verified_at'] = null;
+        }
 
         $user->update($attributes);
 
